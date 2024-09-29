@@ -1,13 +1,25 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection";
 
-export class Profile extends Model {
+interface ProfileAttributes {
+    id: number;
+    firstname: string;
+    lastname: string;
+    profession: string;
+    balance: number;
+    type: string;
+}
+
+export interface ProfileCreationAttributes extends Optional<ProfileAttributes, 'id'> {}
+
+export class Profile extends Model<ProfileAttributes, ProfileCreationAttributes> 
+    implements ProfileAttributes {
     public id!: number;
-    public firstname!: string; 
+    public firstname!: string;
     public lastname!: string;
     public profession!: string;
     public balance!: number;
-
+    public type!: string;
 }
 
 Profile.init(
