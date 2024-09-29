@@ -1,7 +1,16 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection";
 
-export class Deposit extends Model {
+interface DepositAttributes {
+    id: number;
+    profileId: number; 
+    operationDate: Date; 
+    depositValue: number;
+}
+
+export interface DepositCreationAttributes extends Optional<DepositAttributes, 'id'> {}
+
+export class Deposit extends Model<DepositAttributes, DepositCreationAttributes> {
     public id!: number;
     public profileId!: number; 
     public operationDate!: Date; 
