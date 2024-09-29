@@ -1,13 +1,26 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection";
 
-export class Contract extends Model {
+
+interface ContractAttributes {
+    id: number;
+    profileId: number; 
+    terms: string;
+    operationDate: Date;
+    status: string;
+}
+
+export interface ContractCreationAttributes extends Optional<ContractAttributes, 'id'> {}
+
+export class Contract extends Model<ContractAttributes, ContractCreationAttributes> 
+    implements ContractAttributes {
     public id!: number;
     public profileId!: number; 
     public terms!: string;
     public operationDate!: Date;
     public status!: string;
 }
+
 
 Contract.init(
     {
