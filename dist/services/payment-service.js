@@ -7,9 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Payment } from "../models/payment-model";
+import { PaymentRepository } from '../repositories/payment-repository.js';
+import { Payment } from '../models/payment-model.js';
 export class PaymentService {
-    createPayment(jobId, paymentValue) {
+    constructor() {
+        this.paymentRepository = new PaymentRepository();
+    }
+    createPayment(jobId, paymentValue, operationDate) {
         return __awaiter(this, void 0, void 0, function* () {
             if (paymentValue < 0) {
                 throw new Error("Payment value must be positive.");
@@ -18,32 +22,62 @@ export class PaymentService {
                 const payment = yield Payment.create({
                     jobId,
                     paymentValue,
-                    operationDate: new Date(),
+                    operationDate,
                 });
                 return payment;
             }
             catch (error) {
-                if (error instanceof Error) {
-                    throw new Error(`Unable to create payment: ${error.message}`);
-                }
-                else {
-                    throw new Error("An unknown error occurred.");
-                }
+                throw new Error(`Unable to create payment: ${error.message}`);
+            }
+        });
+    }
+    getAllPayments() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.paymentRepository.findAllPayment();
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch payments: ${error.message}`);
+            }
+        });
+    }
+    getPaymentById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.paymentRepository.findById(id);
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch payment with ID ${id}: ${error.message}`);
+            }
+        });
+    }
+    updatePayment(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.paymentRepository.updatePayment(id, data);
+            }
+            catch (error) {
+                throw new Error(`Unable to update payment with ID ${id}: ${error.message}`);
+            }
+        });
+    }
+    deletePayment(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.paymentRepository.deletePayment(id);
+            }
+            catch (error) {
+                throw new Error(`Unable to delete payment with ID ${id}: ${error.message}`);
             }
         });
     }
     getPaymentsByJob(jobId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.findAll({ where: { jobId } });
+                return yield this.paymentRepository.findByJobId(jobId);
             }
             catch (error) {
-                if (error instanceof Error) {
-                    throw new Error(`Unable to fetch payments for job ID ${jobId}: ${error.message}`);
-                }
-                else {
-                    throw new Error("An unknown error occurred.");
-                }
+                throw new Error(`Unable to fetch payments for job ID ${jobId}: ${error.message}`);
             }
         });
     }

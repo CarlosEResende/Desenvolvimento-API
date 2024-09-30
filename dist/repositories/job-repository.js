@@ -7,9 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Op } from "sequelize";
 import { Job } from "../models/job-model.js";
-import sequelize from "sequelize";
 export class JobRepository {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -58,21 +56,6 @@ export class JobRepository {
                 return true;
             }
             return false;
-        });
-    }
-    getTotalUnpaid() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                const total = yield Job.sum('price', {
-                    where: {
-                        paid: { [Op.lt]: sequelize.col('price') }
-                    }
-                });
-                return total || 0;
-            }
-            catch (error) {
-                throw new Error(`Unable to fetch total unpaid jobs: ${error.message}`);
-            }
         });
     }
 }

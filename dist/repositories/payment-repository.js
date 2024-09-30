@@ -7,9 +7,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Payment } from "../models/payment-model";
+import { Payment } from "../models/payment-model.js";
 export class PaymentRepository {
-    create(data) {
+    createPayment(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Payment.create(data);
@@ -19,7 +19,7 @@ export class PaymentRepository {
             }
         });
     }
-    findAll() {
+    findAllPayment() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Payment.findAll();
@@ -39,7 +39,17 @@ export class PaymentRepository {
             }
         });
     }
-    update(id, data) {
+    findByJobId(jobId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Payment.findAll({ where: { jobId } });
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch payments for job ID ${jobId}: ${error.message}`);
+            }
+        });
+    }
+    updatePayment(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             const payment = yield this.findById(id);
             if (payment) {
@@ -48,7 +58,7 @@ export class PaymentRepository {
             return null;
         });
     }
-    delete(id) {
+    deletePayment(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const payment = yield this.findById(id);
             if (payment) {

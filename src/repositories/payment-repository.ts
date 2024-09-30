@@ -1,7 +1,8 @@
-import { Payment, PaymentCreationAttributes } from "../models/payment-model";
+import { Payment, PaymentCreationAttributes } from "../models/payment-model.js";
 
 export class PaymentRepository {
-    public async create(data: PaymentCreationAttributes): Promise<Payment> {
+
+    public async createPayment(data: PaymentCreationAttributes): Promise<Payment> {
         try {
             return await Payment.create(data);
         } catch (error) {
@@ -9,7 +10,7 @@ export class PaymentRepository {
         }
     }
 
-    public async findAll(): Promise<Payment[]> {
+    public async findAllPayment(): Promise<Payment[]> {
         try {
             return await Payment.findAll();
         } catch (error) {
@@ -25,7 +26,16 @@ export class PaymentRepository {
         }
     }
 
-    public async update(id: number, data: Partial<PaymentCreationAttributes>): Promise<Payment | null> {
+    public async findByJobId(jobId: number): Promise<Payment[]> {
+        try {
+            return await Payment.findAll({ where: { jobId } });
+        } catch (error) {
+            throw new Error(`Unable to fetch payments for job ID ${jobId}: ${(error as Error).message}`);
+        }
+    }
+    
+
+    public async updatePayment(id: number, data: Partial<PaymentCreationAttributes>): Promise<Payment | null> {
         const payment = await this.findById(id);
         if (payment) {
             return await payment.update(data);
@@ -33,7 +43,7 @@ export class PaymentRepository {
         return null;
     }
 
-    public async delete(id: number): Promise<boolean> {
+    public async deletePayment(id: number): Promise<boolean> {
         const payment = await this.findById(id);
         if (payment) {
             await payment.destroy();

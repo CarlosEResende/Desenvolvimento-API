@@ -1,36 +1,64 @@
-import { Payment} from "../models/payment-model";
+import { PaymentRepository } from '../repositories/payment-repository.js';
+import { Payment, PaymentCreationAttributes } from '../models/payment-model.js';
 
 export class PaymentService {
-    public async createPayment(jobId: number, paymentValue: number): Promise<Payment> {
+    private paymentRepository = new PaymentRepository();
+
+    public async createPayment(jobId: number, paymentValue: number, operationDate: Date): Promise<Payment> {
         if (paymentValue < 0) {
             throw new Error("Payment value must be positive.");
         }
-
+    
         try {
             const payment = await Payment.create({
                 jobId,
                 paymentValue,
-                operationDate: new Date(),
+                operationDate,
             });
             return payment;
         } catch (error) {
-            if (error instanceof Error) {
-                throw new Error(`Unable to create payment: ${error.message}`);
-            } else {
-                throw new Error("An unknown error occurred.");
-            }
+            throw new Error(`Unable to create payment: ${(error as Error).message}`);
+        }
+    }
+    
+
+    public async getAllPayments(): Promise<Payment[]> {
+        try {
+            return await this.paymentRepository.findAllPayment();
+        } catch (error) {
+            throw new Error(`Unable to fetch payments: ${(error as Error).message}`);
+        }
+    }
+
+    public async getPaymentById(id: number): Promise<Payment | null> {
+        try {
+            return await this.paymentRepository.findById(id);
+        } catch (error) {
+            throw new Error(`Unable to fetch payment with ID ${id}: ${(error as Error).message}`);
+        }
+    }
+
+    public async updatePayment(id: number, data: Partial<PaymentCreationAttributes>): Promise<Payment | null> {
+        try {
+            return await this.paymentRepository.updatePayment(id, data);
+        } catch (error) {
+            throw new Error(`Unable to update payment with ID ${id}: ${(error as Error).message}`);
+        }
+    }
+
+    public async deletePayment(id: number): Promise<boolean> {
+        try {
+            return await this.paymentRepository.deletePayment(id);
+        } catch (error) {
+            throw new Error(`Unable to delete payment with ID ${id}: ${(error as Error).message}`);
         }
     }
 
     public async getPaymentsByJob(jobId: number): Promise<Payment[]> {
         try {
-            return await Payment.findAll({ where: { jobId } });
+            return await this.paymentRepository.findByJobId(jobId);
         } catch (error) {
-            if (error instanceof Error) {
-                throw new Error(`Unable to fetch payments for job ID ${jobId}: ${error.message}`);
-            } else {
-                throw new Error("An unknown error occurred.");
-            }
+            throw new Error(`Unable to fetch payments for job ID ${jobId}: ${(error as Error).message}`);
         }
     }
 }
