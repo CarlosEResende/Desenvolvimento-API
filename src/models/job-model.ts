@@ -1,7 +1,19 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection";
 
-export class Job extends Model {
+interface JobAttributes {
+    id: number;
+    contractId: number;
+    operationDate: Date;
+    paymentDate: Date;
+    price: number;
+    paid: number;
+}
+
+export interface JobCreationAttributes extends Optional<JobAttributes, 'id'> {}
+
+export class Job extends Model<JobAttributes, JobCreationAttributes> 
+    implements JobAttributes {
     public id!: number;
     public contractId!: number; 
     public operationDate!: Date;
