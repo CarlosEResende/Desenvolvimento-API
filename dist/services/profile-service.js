@@ -41,4 +41,24 @@ export class ProfileService {
             }
         });
     }
+    updateProfile(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.updateProfile(id, data);
+            }
+            catch (error) {
+                throw new Error(`Unable to update profile with ID ${id}: ${error.message}`);
+            }
+        });
+    }
+    deleteProfile(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.deleteProfile(id);
+            }
+            catch (error) {
+                throw new Error(`Unable to delete profile with ID ${id}: ${error.message}`);
+            }
+        });
+    }
 }
