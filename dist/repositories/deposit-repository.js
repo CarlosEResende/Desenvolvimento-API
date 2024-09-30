@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Deposit } from "../models/deposit-model";
 export class DepositRepository {
-    create(data) {
+    createDeposit(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Deposit.create(data);
@@ -39,7 +39,7 @@ export class DepositRepository {
             }
         });
     }
-    update(id, data) {
+    updateDeposit(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             const deposit = yield this.findById(id);
             if (deposit) {
@@ -48,7 +48,7 @@ export class DepositRepository {
             return null;
         });
     }
-    delete(id) {
+    deleteDeposit(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const deposit = yield this.findById(id);
             if (deposit) {

@@ -47,4 +47,62 @@ export class DepositService {
             }
         });
     }
+    getDepositById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const deposit = yield Deposit.findByPk(id);
+                if (!deposit) {
+                    throw new Error(`Deposit with ID ${id} not found.`);
+                }
+                return deposit;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Unable to fetch deposit with ID ${id}: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
+            }
+        });
+    }
+    updateDeposit(id, data) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const deposit = yield this.getDepositById(id);
+                if (deposit) {
+                    return yield deposit.update(data);
+                }
+                return null;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Unable to update deposit: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
+            }
+        });
+    }
+    deleteDeposit(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const deposit = yield this.getDepositById(id);
+                if (deposit) {
+                    yield deposit.destroy();
+                    return true;
+                }
+                return false;
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Unable to delete deposit: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
+            }
+        });
+    }
 }

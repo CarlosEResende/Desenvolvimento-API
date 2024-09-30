@@ -14,6 +14,7 @@ export class ProfileController {
     }
     createProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log("Request body:", req.body);
             try {
                 const { firstname, lastname, profession, type } = req.body;
                 const newProfile = yield this.profileService.createProfile(firstname, lastname, profession, type);

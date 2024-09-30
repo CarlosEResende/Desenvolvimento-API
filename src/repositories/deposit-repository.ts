@@ -1,7 +1,7 @@
 import { Deposit, DepositCreationAttributes } from "../models/deposit-model";
 
 export class DepositRepository {
-    public async create(data: DepositCreationAttributes): Promise<Deposit> {
+    public async createDeposit(data: DepositCreationAttributes): Promise<Deposit> {
         try {
             return await Deposit.create(data);
         } catch (error) {
@@ -25,7 +25,7 @@ export class DepositRepository {
         }
     }
 
-    public async update(id: number, data: Partial<DepositCreationAttributes>): Promise<Deposit | null> {
+    public async updateDeposit(id: number, data: Partial<DepositCreationAttributes>): Promise<Deposit | null> {
         const deposit = await this.findById(id);
         if (deposit) {
             return await deposit.update(data);
@@ -33,7 +33,7 @@ export class DepositRepository {
         return null;
     }
 
-    public async delete(id: number): Promise<boolean> {
+    public async deleteDeposit(id: number): Promise<boolean> {
         const deposit = await this.findById(id);
         if (deposit) {
             await deposit.destroy();

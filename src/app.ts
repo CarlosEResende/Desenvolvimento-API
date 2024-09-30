@@ -1,5 +1,6 @@
 import express from "express";
 import profileRoutes from "./routes/profile-route.js"; 
+import depositRoutes from "./routes/deposit-route.js"; 
 import sequelize from "./shared/connection.js"; 
 
 const app = express();
@@ -11,6 +12,8 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/profiles", profileRoutes); 
+app.use("/api/deposits", depositRoutes);
+
 
 (async () => {
     try {
