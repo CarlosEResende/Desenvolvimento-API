@@ -2,7 +2,7 @@ import { Profile, ProfileCreationAttributes } from "../models/profile-model";
 
 export class ProfileRepository {
     
-    public async create(data: ProfileCreationAttributes): Promise<Profile> {
+    public async createProfile(data: ProfileCreationAttributes): Promise<Profile> {
         try {
             return await Profile.create(data);
         } catch (error) {
@@ -26,7 +26,7 @@ export class ProfileRepository {
         }
     }
 
-    public async update(id: number, data: Partial<ProfileCreationAttributes>): Promise<Profile | null> {
+    public async updateProfile(id: number, data: Partial<ProfileCreationAttributes>): Promise<Profile | null> {
         const profile = await this.findById(id);
         if (profile) {
             return await profile.update(data);
@@ -34,7 +34,7 @@ export class ProfileRepository {
         return null;
     }
 
-    public async delete(id: number): Promise<boolean> {
+    public async deleteProfile(id: number): Promise<boolean> {
         const profile = await this.findById(id);
         if (profile) {
             await profile.destroy();
