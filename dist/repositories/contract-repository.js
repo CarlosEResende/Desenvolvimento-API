@@ -7,7 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Contract } from "../models/contract-model";
+import { Contract } from "../models/contract-model.js";
 export class ContractRepository {
     create(data) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -16,16 +16,6 @@ export class ContractRepository {
             }
             catch (error) {
                 throw new Error(`Unable to create contract: ${error.message}`);
-            }
-        });
-    }
-    findAll() {
-        return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield Contract.findAll();
-            }
-            catch (error) {
-                throw new Error(`Unable to fetch contracts: ${error.message}`);
             }
         });
     }
@@ -39,7 +29,7 @@ export class ContractRepository {
             }
         });
     }
-    update(id, data) {
+    updateContract(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             const contract = yield this.findById(id);
             if (contract) {
@@ -48,7 +38,7 @@ export class ContractRepository {
             return null;
         });
     }
-    delete(id) {
+    deleteContract(id) {
         return __awaiter(this, void 0, void 0, function* () {
             const contract = yield this.findById(id);
             if (contract) {
@@ -56,6 +46,26 @@ export class ContractRepository {
                 return true;
             }
             return false;
+        });
+    }
+    findByProfileId(profileId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Contract.findAll({ where: { profileId } });
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch contracts for profile ID: ${error.message}`);
+            }
+        });
+    }
+    findAllContracts() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Contract.findAll();
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch contracts: ${error.message}`);
+            }
         });
     }
 }

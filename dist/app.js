@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import express from "express";
 import profileRoutes from "./routes/profile-route.js";
 import depositRoutes from "./routes/deposit-route.js";
+import jobRoutes from './routes/job-route.js';
+import contractRoutes from './routes/contract-route.js';
 import sequelize from "./shared/connection.js";
 const app = express();
 app.use(express.json());
@@ -19,6 +21,8 @@ app.get("/", (req, res) => {
 });
 app.use("/api/profiles", profileRoutes);
 app.use("/api/deposits", depositRoutes);
+app.use('/api/jobs', jobRoutes);
+app.use('/api/contracts', contractRoutes);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield sequelize.authenticate();

@@ -74,7 +74,7 @@ export class DepositController {
                 if (!success) {
                     return res.status(404).json({ message: "Deposit not found" });
                 }
-                return res.status(204).send(); // 204 No Content
+                return res.status(204).send();
             }
             catch (error) {
                 return res.status(500).json({ message: "Failed to delete deposit", error });

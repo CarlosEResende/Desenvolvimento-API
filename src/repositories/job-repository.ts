@@ -1,6 +1,9 @@
-import { Job, JobCreationAttributes } from "../models/job-model";
+import { Op } from "sequelize";
+import { Job, JobCreationAttributes } from "../models/job-model.js";
+import sequelize from "sequelize";
 
 export class JobRepository {
+
     public async create(data: JobCreationAttributes): Promise<Job> {
         try {
             return await Job.create(data);
@@ -25,7 +28,7 @@ export class JobRepository {
         }
     }
 
-    public async update(id: number, data: Partial<JobCreationAttributes>): Promise<Job | null> {
+    public async updateJob(id: number, data: Partial<JobCreationAttributes>): Promise<Job | null> {
         const job = await this.findById(id);
         if (job) {
             return await job.update(data);
@@ -33,7 +36,7 @@ export class JobRepository {
         return null;
     }
 
-    public async delete(id: number): Promise<boolean> {
+    public async deleteJob(id: number): Promise<boolean> {
         const job = await this.findById(id);
         if (job) {
             await job.destroy();
@@ -41,4 +44,9 @@ export class JobRepository {
         }
         return false;
     }
+
+    
+    
+
+    
 }
