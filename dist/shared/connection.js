@@ -5,6 +5,6 @@ const sequelize = new Sequelize({
     username: "root",
     password: "Database123c",
     host: "localhost",
-    port: 3307
+    port: 3306
 });
 export default sequelize;

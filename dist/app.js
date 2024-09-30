@@ -19,9 +19,9 @@ app.get("/", (req, res) => {
 app.use("/api/profiles", profileRoutes);
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        yield sequelize.query("CREATE DATABASE IF NOT EXISTS bcofionode");
+       
         yield sequelize.authenticate();
-        console.log("DataBase connected successfully");
+        console.log("Database connected successfully");
         yield sequelize.sync({ force: false });
         console.log("Models synchronized with the database.");
         app.listen(PORT, () => {

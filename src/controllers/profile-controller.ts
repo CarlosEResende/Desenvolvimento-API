@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { ProfileService } from "../services/profile-service";
+import { ProfileService } from "../services/profile-service.js";
 
 export class ProfileController {
     private profileService: ProfileService;
@@ -9,6 +9,7 @@ export class ProfileController {
     }
 
     public async createProfile(req: Request, res: Response): Promise<Response> {
+        console.log("Request body:", req.body);
         try {
             const { firstname, lastname, profession, type } = req.body; 
             const newProfile = await this.profileService.createProfile(firstname, lastname, profession, type);
