@@ -1,12 +1,25 @@
-import { DataTypes, Model } from "sequelize";
+import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection";
 
-export class Payment extends Model {
+
+interface PaymentAttributes {
+    id: number;
+    jobId: number; 
+    operationDate: Date;
+    paymentValue: number;
+    
+}
+
+export interface PaymentCreationAttributes extends Optional<PaymentAttributes, 'id'> {}
+
+export class Payment extends Model<PaymentAttributes, PaymentCreationAttributes> 
+    implements PaymentAttributes {
     public id!: number;
     public jobId!: number; 
     public operationDate!: Date;
     public paymentValue!: number;
 }
+
 
 Payment.init(
     {

@@ -1,0 +1,44 @@
+import { Payment, PaymentCreationAttributes } from "../models/payment-model";
+
+export class PaymentRepository {
+    public async create(data: PaymentCreationAttributes): Promise<Payment> {
+        try {
+            return await Payment.create(data);
+        } catch (error) {
+            throw new Error(`Unable to create payment: ${(error as Error).message}`);
+        }
+    }
+
+    public async findAll(): Promise<Payment[]> {
+        try {
+            return await Payment.findAll();
+        } catch (error) {
+            throw new Error(`Unable to fetch payments: ${(error as Error).message}`);
+        }
+    }
+
+    public async findById(id: number): Promise<Payment | null> {
+        try {
+            return await Payment.findByPk(id);
+        } catch (error) {
+            throw new Error(`Unable to fetch payments with ID: ${(error as Error).message}`);
+        }
+    }
+
+    public async update(id: number, data: Partial<PaymentCreationAttributes>): Promise<Payment | null> {
+        const payment = await this.findById(id);
+        if (payment) {
+            return await payment.update(data);
+        }
+        return null;
+    }
+
+    public async delete(id: number): Promise<boolean> {
+        const payment = await this.findById(id);
+        if (payment) {
+            await payment.destroy();
+            return true;
+        }
+        return false;
+    }
+}
