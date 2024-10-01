@@ -47,5 +47,13 @@ export class ProfileRepository {
         const profile = await this.findById(id);
         return profile ? profile.balance : null;
     }
+
+    public async findAllPayment(): Promise<Profile[]> {
+        try {
+            return await Profile.findAll();
+        } catch (error) {
+            throw new Error(`Unable to fetch profiles: ${(error as Error).message}`);
+        }
+    }
 }
 

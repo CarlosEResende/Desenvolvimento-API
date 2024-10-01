@@ -3,8 +3,8 @@ import { Deposit } from "../models/deposit-model.js";
 export class DepositService {
     
     public async createDeposit(profileId: number, depositValue: number): Promise<Deposit> {
-        if (depositValue < 0) {
-            throw new Error("Deposit value must be positive.");
+        if (depositValue <= 0) {
+            throw new Error("Deposit value must be positive and cannot be zero.");
         }
 
         try {

@@ -19,7 +19,7 @@ export class DepositRepository {
             }
         });
     }
-    findAll() {
+    findAllDeposit() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Deposit.findAll();
@@ -29,7 +29,7 @@ export class DepositRepository {
             }
         });
     }
-    findById(id) {
+    findDepositById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Deposit.findByPk(id);
@@ -41,7 +41,7 @@ export class DepositRepository {
     }
     updateDeposit(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
-            const deposit = yield this.findById(id);
+            const deposit = yield this.findDepositById(id);
             if (deposit) {
                 return yield deposit.update(data);
             }
@@ -50,7 +50,7 @@ export class DepositRepository {
     }
     deleteDeposit(id) {
         return __awaiter(this, void 0, void 0, function* () {
-            const deposit = yield this.findById(id);
+            const deposit = yield this.findDepositById(id);
             if (deposit) {
                 yield deposit.destroy();
                 return true;

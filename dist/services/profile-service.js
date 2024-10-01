@@ -44,7 +44,12 @@ export class ProfileService {
     updateProfile(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.updateProfile(id, data);
+                const profile = yield Profile.findByPk(id);
+                if (!profile) {
+                    return null;
+                }
+                yield profile.update(data);
+                return profile;
             }
             catch (error) {
                 throw new Error(`Unable to update profile with ID ${id}: ${error.message}`);
@@ -54,10 +59,30 @@ export class ProfileService {
     deleteProfile(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.deleteProfile(id);
+                const profile = yield Profile.findByPk(id);
+                if (!profile) {
+                    return false;
+                }
+                yield profile.destroy();
+                return true;
             }
             catch (error) {
                 throw new Error(`Unable to delete profile with ID ${id}: ${error.message}`);
+            }
+        });
+    }
+    getAllProfile() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Profile.findAll();
+            }
+            catch (error) {
+                if (error instanceof Error) {
+                    throw new Error(`Unable to fetch profile: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
             }
         });
     }

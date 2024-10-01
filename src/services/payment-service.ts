@@ -24,36 +24,61 @@ export class PaymentService {
 
     public async getAllPayments(): Promise<Payment[]> {
         try {
-            return await this.paymentRepository.findAllPayment();
+            return await Payment.findAll();
         } catch (error) {
-            throw new Error(`Unable to fetch payments: ${(error as Error).message}`);
+            if (error instanceof Error) {
+                throw new Error(`Unable to fetch payments: ${error.message}`);
+            } else {
+                throw new Error("An unknown error occurred.");
+            }
         }
     }
 
     public async getPaymentById(id: number): Promise<Payment | null> {
         try {
-            return await this.paymentRepository.findById(id);
+            const payment = await Payment.findByPk(id);
+            if (!payment) {
+                throw new Error(`Payment with ID ${id} not found.`);
+            }
+            return payment;
         } catch (error) {
-            throw new Error(`Unable to fetch payment with ID ${id}: ${(error as Error).message}`);
+            if (error instanceof Error) {
+                throw new Error(`Unable to fetch payment with ID ${id}: ${error.message}`);
+            } else {
+                throw new Error("An unknown error occurred.");
+            }
         }
     }
 
     public async updatePayment(id: number, data: Partial<PaymentCreationAttributes>): Promise<Payment | null> {
         try {
-            return await this.paymentRepository.updatePayment(id, data);
+            const payment = await Payment.findByPk(id);
+            if (!payment) {
+                return null; 
+            }
+    
+            await payment.update(data); 
+            return payment; 
         } catch (error) {
             throw new Error(`Unable to update payment with ID ${id}: ${(error as Error).message}`);
         }
     }
+    
 
     public async deletePayment(id: number): Promise<boolean> {
         try {
-            return await this.paymentRepository.deletePayment(id);
+            const payment = await Payment.findByPk(id); 
+            if (!payment) {
+                return false;
+            }
+    
+            await payment.destroy(); 
+            return true; 
         } catch (error) {
             throw new Error(`Unable to delete payment with ID ${id}: ${(error as Error).message}`);
         }
     }
-
+    
     public async getPaymentsByJob(jobId: number): Promise<Payment[]> {
         try {
             return await this.paymentRepository.findByJobId(jobId);

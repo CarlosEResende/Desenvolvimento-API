@@ -32,10 +32,10 @@ export class ProfileController {
 
     public async updateProfile(req: Request, res: Response): Promise<Response> {
         const { id } = req.params;
-        const {  firstname, lastname, profession, type} = req.body; 
+        const {  firstname, lastname, profession, type, balance} = req.body; 
 
         try {
-            const updatedProfile = await this.profileService.updateProfile(Number(id), {  firstname, lastname, profession, type });
+            const updatedProfile = await this.profileService.updateProfile(Number(id), {  firstname, lastname, profession, type, balance });
             if (!updatedProfile) {
                 return res.status(404).json({ message: "Profile not found" });
             }
@@ -58,4 +58,15 @@ export class ProfileController {
             return res.status(500).json({ message: "Failed to delete profile", error });
         }
     }
+
+    public async getAllProfile(req: Request, res: Response): Promise<Response> {
+        try {
+            const profile = await this.profileService.getAllProfile();
+            return res.status(200).json(profile);
+        } catch (error) {
+            return res.status(500).json({ message: "Failed to fetch profiles", error });
+        }
+    }
+
+    
 }

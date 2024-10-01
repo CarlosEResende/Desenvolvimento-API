@@ -30,7 +30,13 @@ export class ProfileService {
 
     public async updateProfile(id: number, data: Partial<ProfileCreationAttributes>): Promise<Profile | null> {
         try {
-            return await this.updateProfile(id, data);
+            const profile = await Profile.findByPk(id);
+            if (!profile) {
+                return null; 
+            }
+    
+            await profile.update(data); 
+            return profile; 
         } catch (error) {
             throw new Error(`Unable to update profile with ID ${id}: ${(error as Error).message}`);
         }
@@ -38,9 +44,27 @@ export class ProfileService {
 
     public async deleteProfile(id: number): Promise<boolean> {
         try {
-            return await this.deleteProfile(id);
+            const profile = await Profile.findByPk(id); 
+            if (!profile) {
+                return false;
+            }
+    
+            await profile.destroy(); 
+            return true; 
         } catch (error) {
             throw new Error(`Unable to delete profile with ID ${id}: ${(error as Error).message}`);
+        }
+    }
+
+    public async getAllProfile(): Promise<Profile[]> {
+        try {
+            return await Profile.findAll();
+        } catch (error) {
+            if (error instanceof Error) {
+                throw new Error(`Unable to fetch profile: ${error.message}`);
+            } else {
+                throw new Error("An unknown error occurred.");
+            }
         }
     }
 }

@@ -64,4 +64,14 @@ export class ProfileRepository {
             return profile ? profile.balance : null;
         });
     }
+    findAllPayment() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield Profile.findAll();
+            }
+            catch (error) {
+                throw new Error(`Unable to fetch profiles: ${error.message}`);
+            }
+        });
+    }
 }

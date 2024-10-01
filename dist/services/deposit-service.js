@@ -11,8 +11,8 @@ import { Deposit } from "../models/deposit-model.js";
 export class DepositService {
     createDeposit(profileId, depositValue) {
         return __awaiter(this, void 0, void 0, function* () {
-            if (depositValue < 0) {
-                throw new Error("Deposit value must be positive.");
+            if (depositValue <= 0) {
+                throw new Error("Deposit value must be positive and cannot be zero.");
             }
             try {
                 const deposit = yield Deposit.create({

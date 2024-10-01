@@ -43,9 +43,9 @@ export class ProfileController {
     updateProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
             const { id } = req.params;
-            const { firstname, lastname, profession, type } = req.body;
+            const { firstname, lastname, profession, type, balance } = req.body;
             try {
-                const updatedProfile = yield this.profileService.updateProfile(Number(id), { firstname, lastname, profession, type });
+                const updatedProfile = yield this.profileService.updateProfile(Number(id), { firstname, lastname, profession, type, balance });
                 if (!updatedProfile) {
                     return res.status(404).json({ message: "Profile not found" });
                 }
@@ -68,6 +68,17 @@ export class ProfileController {
             }
             catch (error) {
                 return res.status(500).json({ message: "Failed to delete profile", error });
+            }
+        });
+    }
+    getAllProfile(req, res) {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                const profile = yield this.profileService.getAllProfile();
+                return res.status(200).json(profile);
+            }
+            catch (error) {
+                return res.status(500).json({ message: "Failed to fetch profiles", error });
             }
         });
     }

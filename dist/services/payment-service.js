@@ -34,27 +34,46 @@ export class PaymentService {
     getAllPayments() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.paymentRepository.findAllPayment();
+                return yield Payment.findAll();
             }
             catch (error) {
-                throw new Error(`Unable to fetch payments: ${error.message}`);
+                if (error instanceof Error) {
+                    throw new Error(`Unable to fetch payments: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
             }
         });
     }
     getPaymentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.paymentRepository.findById(id);
+                const payment = yield Payment.findByPk(id);
+                if (!payment) {
+                    throw new Error(`Payment with ID ${id} not found.`);
+                }
+                return payment;
             }
             catch (error) {
-                throw new Error(`Unable to fetch payment with ID ${id}: ${error.message}`);
+                if (error instanceof Error) {
+                    throw new Error(`Unable to fetch payment with ID ${id}: ${error.message}`);
+                }
+                else {
+                    throw new Error("An unknown error occurred.");
+                }
             }
         });
     }
     updatePayment(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.paymentRepository.updatePayment(id, data);
+                const payment = yield Payment.findByPk(id);
+                if (!payment) {
+                    return null;
+                }
+                yield payment.update(data);
+                return payment;
             }
             catch (error) {
                 throw new Error(`Unable to update payment with ID ${id}: ${error.message}`);
@@ -64,7 +83,12 @@ export class PaymentService {
     deletePayment(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield this.paymentRepository.deletePayment(id);
+                const payment = yield Payment.findByPk(id);
+                if (!payment) {
+                    return false;
+                }
+                yield payment.destroy();
+                return true;
             }
             catch (error) {
                 throw new Error(`Unable to delete payment with ID ${id}: ${error.message}`);

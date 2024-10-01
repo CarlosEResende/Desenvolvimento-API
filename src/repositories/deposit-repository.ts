@@ -10,7 +10,7 @@ export class DepositRepository {
         }
     }
 
-    public async findAll(): Promise<Deposit[]> {
+    public async findAllDeposit(): Promise<Deposit[]> {
         try {
             return await Deposit.findAll();
         } catch (error) {
@@ -18,7 +18,7 @@ export class DepositRepository {
         }
     }
 
-    public async findById(id: number): Promise<Deposit | null> {
+    public async findDepositById(id: number): Promise<Deposit | null> {
         try {
             return await Deposit.findByPk(id);
         } catch (error) {
@@ -27,7 +27,7 @@ export class DepositRepository {
     }
 
     public async updateDeposit(id: number, data: Partial<DepositCreationAttributes>): Promise<Deposit | null> {
-        const deposit = await this.findById(id);
+        const deposit = await this.findDepositById(id);
         if (deposit) {
             return await deposit.update(data);
         }
@@ -35,7 +35,7 @@ export class DepositRepository {
     }
 
     public async deleteDeposit(id: number): Promise<boolean> {
-        const deposit = await this.findById(id);
+        const deposit = await this.findDepositById(id);
         if (deposit) {
             await deposit.destroy();
             return true;
