@@ -8,7 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import { Job } from "../models/job-model.js";
+import { JobRepository } from '../repositories/job-repository.js';
 export class JobService {
+    constructor() {
+        this.jobRepository = new JobRepository;
+    }
     createJob(contractId, operationDate, paymentDate, price, paid) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
@@ -101,6 +105,17 @@ export class JobService {
                 else {
                     throw new Error("An unknown error occurred.");
                 }
+            }
+        });
+    }
+    getUnpaidJobsTotal() {
+        return __awaiter(this, void 0, void 0, function* () {
+            try {
+                return yield this.jobRepository.sumUnpaidJobs();
+            }
+            catch (error) {
+                console.error('Error while summing unpaid jobs:', error);
+                throw new Error('Failed to retrieve unpaid jobs total');
             }
         });
     }

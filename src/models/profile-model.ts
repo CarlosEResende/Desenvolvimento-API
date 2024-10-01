@@ -43,7 +43,10 @@ Profile.init(
         },
         balance: {
             type: DataTypes.FLOAT,
-            defaultValue: 0,
+            allowNull: false,
+            validate: {
+                min: 0, 
+            },
         },
         type: {
             type: DataTypes.STRING,
@@ -57,4 +60,6 @@ Profile.init(
         timestamps: false,
     },
 );
+
+
 

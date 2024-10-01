@@ -16,8 +16,8 @@ export class ProfileController {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("Request body:", req.body);
             try {
-                const { firstname, lastname, profession, type } = req.body;
-                const newProfile = yield this.profileService.createProfile(firstname, lastname, profession, type);
+                const { firstname, lastname, profession, type, balance } = req.body;
+                const newProfile = yield this.profileService.createProfile(firstname, lastname, profession, type, balance);
                 return res.status(201).json(newProfile);
             }
             catch (error) {

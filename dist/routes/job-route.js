@@ -7,4 +7,5 @@ router.get("/:id", (req, res) => jobController.getJobById(req, res));
 router.put("/:id", (req, res) => jobController.updateJob(req, res));
 router.delete("/:id", (req, res) => jobController.deleteJob(req, res));
 router.get("/contract/:contractId", (req, res) => jobController.getJobsByContract(req, res));
+router.get('/unpaid/sum', (req, res) => jobController.getUnpaidJobsTotal(req, res));
 export default router;

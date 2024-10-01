@@ -9,10 +9,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Profile } from "../models/profile-model.js";
 export class ProfileService {
-    createProfile(firstname, lastname, profession, type) {
+    createProfile(firstname, lastname, profession, type, balance) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const profile = yield Profile.create({ firstname, lastname, profession, balance: 0, type });
+                const profile = yield Profile.create({ firstname, lastname, profession, balance, type });
                 return profile;
             }
             catch (error) {

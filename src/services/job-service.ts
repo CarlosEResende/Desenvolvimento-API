@@ -1,8 +1,12 @@
 import { Job } from "../models/job-model.js"; 
+import { JobRepository } from '../repositories/job-repository.js'; 
+
 
 export class JobService {
 
-    public async createJob(contractId: number, operationDate: Date, paymentDate: Date, price: number, paid: number): Promise<Job> {
+    private jobRepository = new JobRepository
+
+    public async createJob(contractId: number, operationDate: Date, paymentDate: Date, price: number, paid: boolean): Promise<Job> {
         
         try {
             const job = await Job.create({
@@ -50,7 +54,7 @@ export class JobService {
         }
     }
 
-    public async updateJob(id: number, data: Partial<{ contractId: number, operationDate: Date, paymentDate: Date, price: number, paid: number }>): Promise<Job | null> {
+    public async updateJob(id: number, data: Partial<{ contractId: number, operationDate: Date, paymentDate: Date, price: number, paid: boolean }>): Promise<Job | null> {
         try {
             const job = await this.getJobById(id);
             if (job) {
@@ -82,4 +86,12 @@ export class JobService {
             }
         }
     }
+
+    public async getUnpaidJobsTotal(): Promise<number> {
+        try {
+            return await this.jobRepository.sumUnpaidJobs();
+        } catch (error) {
+            console.error('Error while summing unpaid jobs:', error);
+            throw new Error('Failed to retrieve unpaid jobs total'); 
+        }    }
 }

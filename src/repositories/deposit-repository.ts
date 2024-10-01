@@ -1,6 +1,7 @@
 import { Deposit, DepositCreationAttributes } from "../models/deposit-model";
 
 export class DepositRepository {
+    
     public async createDeposit(data: DepositCreationAttributes): Promise<Deposit> {
         try {
             return await Deposit.create(data);

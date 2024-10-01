@@ -25,7 +25,7 @@ Job.init({
         allowNull: false,
     },
     paid: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.BOOLEAN,
         allowNull: false,
     }
 }, {

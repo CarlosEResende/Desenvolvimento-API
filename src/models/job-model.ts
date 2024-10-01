@@ -1,13 +1,14 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import sequelize from "../shared/connection.js";
 
+
 interface JobAttributes {
     id: number;
     contractId: number;
     operationDate: Date;
     paymentDate: Date;
     price: number;
-    paid: number;
+    paid: boolean;
 }
 
 export interface JobCreationAttributes extends Optional<JobAttributes, 'id'> {}
@@ -19,7 +20,7 @@ export class Job extends Model<JobAttributes, JobCreationAttributes>
     public operationDate!: Date;
     public paymentDate!: Date;
     public price!: number;
-    public paid!: number;
+    public paid!: boolean;
 }
 
 Job.init(
@@ -46,7 +47,7 @@ Job.init(
             allowNull: false,
         },
         paid:{
-            type: DataTypes.INTEGER,
+            type: DataTypes.BOOLEAN,
             allowNull: false,
         }
         
@@ -58,3 +59,6 @@ Job.init(
         timestamps: false,
     },
 );
+
+
+

@@ -2,9 +2,9 @@ import { Profile, ProfileCreationAttributes } from "../models/profile-model.js";
 
 export class ProfileService {
     
-    public async createProfile(firstname: string, lastname: string, profession: string, type: string): Promise<Profile> {
+    public async createProfile(firstname: string, lastname: string, profession: string, type: string, balance: number): Promise<Profile> {
         try {
-            const profile = await Profile.create({ firstname, lastname, profession, balance: 0, type });
+            const profile = await Profile.create({ firstname, lastname, profession, balance, type });
             return profile;
         } catch (error) {
             if (error instanceof Error) {

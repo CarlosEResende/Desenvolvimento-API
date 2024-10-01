@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import { Job } from "../models/job-model.js";
 export class JobRepository {
-    create(data) {
+    createJob(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
                 return yield Job.create(data);
@@ -56,6 +56,16 @@ export class JobRepository {
                 return true;
             }
             return false;
+        });
+    }
+    sumUnpaidJobs() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const result = yield Job.sum('price', {
+                where: {
+                    paid: false,
+                },
+            });
+            return result || 0;
         });
     }
 }

@@ -61,11 +61,25 @@ export class JobController {
     public async getJobsByContract(req: Request, res: Response): Promise<Response> {
         const { contractId } = req.params;
 
+        if (isNaN(Number(contractId)) || Number(contractId) <= 0) {
+            return res.status(400).json({ message: "Invalid contract ID" });
+        }
+
         try {
             const jobs = await this.jobService.getJobsByContract(Number(contractId));
             return res.status(200).json(jobs);
         } catch (error) {
             return res.status(500).json({ message: "An unknown error occurred.", error });
+        }
+    }
+    
+    public async getUnpaidJobsTotal(req: Request, res: Response): Promise<void> {
+        try {
+            const total = await this.jobService.getUnpaidJobsTotal();
+            res.status(200).json({ total });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Error retrieving the sum of unpaid jobs', error });
         }
     }
 }

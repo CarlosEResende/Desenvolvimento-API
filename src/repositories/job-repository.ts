@@ -1,10 +1,11 @@
 import { Op } from "sequelize";
 import { Job, JobCreationAttributes } from "../models/job-model.js";
+
 import sequelize from "sequelize";
 
 export class JobRepository {
 
-    public async create(data: JobCreationAttributes): Promise<Job> {
+    public async createJob(data: JobCreationAttributes): Promise<Job> {
         try {
             return await Job.create(data);
         } catch (error) {
@@ -45,8 +46,16 @@ export class JobRepository {
         return false;
     }
 
+    public async sumUnpaidJobs(): Promise<number> {
+        const result = await Job.sum('price', {
+            where: {
+                paid: false,
+            },
+        });
+        return result || 0; 
+    }
     
     
-
+    
     
 }
