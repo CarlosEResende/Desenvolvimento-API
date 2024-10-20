@@ -37,12 +37,12 @@ pipeline {
             }
         }
     }
-    
+
     post {
         always {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             junit '**/target/test-reports/*.xml'
-            mail to: 'team@example.com',
+            mail to: 'carlozresende@gmail.com',
                  subject: "Build ${currentBuild.fullDisplayName}",
                  body: "Build ${currentBuild.fullDisplayName} completed with status: ${currentBuild.result}"
         }
