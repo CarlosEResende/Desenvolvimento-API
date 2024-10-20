@@ -1,14 +1,24 @@
 import request from 'supertest';
 import app from '../app';  
 
-test('deve criar um novo perfil com sucesso', async () => {
-    const newProfileData = {
-        id: 1,
+
+beforeAll(async () => {
+    await request(app).post('/api/profiles').send({
         firstname: 'João',
         lastname: 'Silva',
         profession: 'Desenvolvedor',
         type: 'Pessoal',
         balance: 1000.00
+    });
+});
+
+test('deve criar um novo perfil com sucesso', async () => {
+    const newProfileData = {
+        firstname: 'Ana',
+        lastname: 'Santos',
+        profession: 'Engenheira',
+        type: 'Profissional',
+        balance: 2000.00
     };
     const response = await request(app)
         .post('/api/profiles')
@@ -29,11 +39,9 @@ test('deve atualizar um perfil com sucesso', async () => {
         type: 'Pessoal',
         balance: 1500.00
     };
-
     const response = await request(app)
         .put('/api/profiles/1')
         .send(updatedProfileData);
-
     expect(response.status).toBe(200);
     expect(response.body.firstname).toBe(updatedProfileData.firstname);
     expect(response.body.lastname).toBe(updatedProfileData.lastname);
@@ -45,10 +53,8 @@ test('deve atualizar um perfil com sucesso', async () => {
 test('deve deletar um perfil com sucesso', async () => {
     const response = await request(app)
         .delete('/api/profiles/1');
-
     expect(response.status).toBe(204);
 });
-
 
 
 
