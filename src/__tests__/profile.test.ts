@@ -37,7 +37,7 @@ test('Deve Atualizar o Perfil de acordo com o id atribuido', async () =>{
         lastname: 'Silva',
         profession: 'Desenvolvedor',
         type: 'Pessoal',
-        balance: 1050.00
+        balance: 1090.00
     })
 
     
