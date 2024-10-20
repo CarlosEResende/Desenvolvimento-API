@@ -10,12 +10,10 @@ test('deve criar um novo perfil com sucesso', async () => {
         type: 'Pessoal',
         balance: 1000.00
     };
-
     const response = await request(app)
         .post('/api/profiles')
         .send(newProfileData);
-
-    expect(response.status).toBe(201); 
+    expect(response.status).toBe(201);
     expect(response.body.firstname).toBe(newProfileData.firstname);
     expect(response.body.lastname).toBe(newProfileData.lastname);
     expect(response.body.profession).toBe(newProfileData.profession);
