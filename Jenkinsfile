@@ -41,8 +41,7 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: '**/dist/**/*.*', fingerprint: true
-            junit '**/test-results/junit.xml'
-            mail to: 'carlozresende@gmail.com',
+            mail to: 'carlozresende@example.com',  
                  subject: "Build ${currentBuild.fullDisplayName}",
                  body: "Build ${currentBuild.fullDisplayName} completed with status: ${currentBuild.result}"
         }
