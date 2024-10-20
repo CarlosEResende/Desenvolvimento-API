@@ -33,7 +33,7 @@ test('Deve Atualizar o Perfil de acordo com o id atribuido', async () =>{
 
     expect(response.body).toEqual({
         id: 1,
-        firstname: 'Maria',
+        firstname: 'Marina',
         lastname: 'Silva',
         profession: 'Desenvolvedor',
         type: 'Pessoal',
