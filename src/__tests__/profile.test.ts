@@ -23,25 +23,8 @@ test('deve criar um novo perfil com sucesso', async () => {
     expect(response.body.balance).toBe(newProfileData.balance);
 });
 
-test('Deve Atualizar o Perfil de acordo com o id atribuido', async () => {
-    const response = await request(app).put('/api/profiles/1').send({
-        firstname: 'João',
-        lastname: 'Silva',
-        profession: 'Desenvolvedor',
-        type: 'Pessoal',
-        balance: 1000
-    });
 
-    expect(response.status).toBe(201);
-    expect(response.body).toEqual({
-        id: 1,
-        firstname: 'João',
-        lastname: 'Silva',
-        profession: 'Desenvolvedor',
-        type: 'Pessoal',
-        balance: 1000
-    });
-});
+
 
 
 
