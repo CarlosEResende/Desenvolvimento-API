@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import { Job, JobCreationAttributes } from "../models/job-model.js";
+import { Job, JobCreationAttributes } from "../models/job-model";
 
 import sequelize from "sequelize";
 

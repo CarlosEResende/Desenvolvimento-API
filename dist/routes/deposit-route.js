@@ -1,10 +1,12 @@
-import { Router } from "express";
-import { DepositController } from "../controllers/deposit-controller.js";
-const router = Router();
-const depositController = new DepositController();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const deposit_controller_1 = require("../controllers/deposit-controller");
+const router = (0, express_1.Router)();
+const depositController = new deposit_controller_1.DepositController();
 router.post("/", (req, res) => depositController.createDeposit(req, res));
 router.get("/", (req, res) => depositController.getAllDeposits(req, res));
 router.get("/:id", (req, res) => depositController.getDepositById(req, res));
 router.put("/:id", (req, res) => depositController.updateDeposit(req, res));
 router.delete("/:id", (req, res) => depositController.deleteDeposit(req, res));
-export default router;
+exports.default = router;

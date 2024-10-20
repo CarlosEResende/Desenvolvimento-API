@@ -1,5 +1,5 @@
-import { PaymentRepository } from '../repositories/payment-repository.js';
-import { Payment, PaymentCreationAttributes } from '../models/payment-model.js';
+import { PaymentRepository } from '../repositories/payment-repository';
+import { Payment, PaymentCreationAttributes } from '../models/payment-model';
 
 export class PaymentService {
     private paymentRepository = new PaymentRepository();

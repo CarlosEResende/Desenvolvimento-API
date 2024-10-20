@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,15 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Deposit } from "../models/deposit-model.js";
-export class DepositService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DepositService = void 0;
+const deposit_model_1 = require("../models/deposit-model");
+class DepositService {
     createDeposit(profileId, depositValue) {
         return __awaiter(this, void 0, void 0, function* () {
             if (depositValue <= 0) {
                 throw new Error("Deposit value must be positive and cannot be zero.");
             }
             try {
-                const deposit = yield Deposit.create({
+                const deposit = yield deposit_model_1.Deposit.create({
                     profileId,
                     operationDate: new Date(),
                     depositValue,
@@ -35,7 +38,7 @@ export class DepositService {
     getAllDeposits() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Deposit.findAll();
+                return yield deposit_model_1.Deposit.findAll();
             }
             catch (error) {
                 if (error instanceof Error) {
@@ -50,7 +53,7 @@ export class DepositService {
     getDepositById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const deposit = yield Deposit.findByPk(id);
+                const deposit = yield deposit_model_1.Deposit.findByPk(id);
                 if (!deposit) {
                     throw new Error(`Deposit with ID ${id} not found.`);
                 }
@@ -106,3 +109,4 @@ export class DepositService {
         });
     }
 }
+exports.DepositService = DepositService;

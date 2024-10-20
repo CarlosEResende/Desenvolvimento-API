@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Contract } from "../models/contract-model.js";
-export class ContractService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ContractService = void 0;
+const contract_model_1 = require("../models/contract-model");
+class ContractService {
     createContract(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Contract.create(data);
+                return yield contract_model_1.Contract.create(data);
             }
             catch (error) {
                 throw new Error(`Unable to create contract: ${error.message}`);
@@ -22,7 +25,7 @@ export class ContractService {
     getAllContracts() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Contract.findAll();
+                return yield contract_model_1.Contract.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch contracts: ${error.message}`);
@@ -32,7 +35,7 @@ export class ContractService {
     getContractsByProfile(profileId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Contract.findAll({ where: { profileId } });
+                return yield contract_model_1.Contract.findAll({ where: { profileId } });
             }
             catch (error) {
                 throw new Error(`Unable to fetch contracts for profile ID ${profileId}: ${error.message}`);
@@ -71,7 +74,7 @@ export class ContractService {
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Contract.findByPk(id);
+                return yield contract_model_1.Contract.findByPk(id);
             }
             catch (error) {
                 throw new Error(`Unable to find contract with ID: ${error.message}`);
@@ -79,3 +82,4 @@ export class ContractService {
         });
     }
 }
+exports.ContractService = ContractService;

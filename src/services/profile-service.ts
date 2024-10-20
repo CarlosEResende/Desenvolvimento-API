@@ -1,4 +1,4 @@
-import { Profile, ProfileCreationAttributes } from "../models/profile-model.js";
+import { Profile, ProfileCreationAttributes } from "../models/profile-model";
 
 export class ProfileService {
     

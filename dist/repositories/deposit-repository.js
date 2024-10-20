@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Deposit } from "../models/deposit-model";
-export class DepositRepository {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DepositRepository = void 0;
+const deposit_model_1 = require("../models/deposit-model");
+class DepositRepository {
     createDeposit(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Deposit.create(data);
+                return yield deposit_model_1.Deposit.create(data);
             }
             catch (error) {
                 throw new Error(`Unable to create deposit: ${error.message}`);
@@ -22,7 +25,7 @@ export class DepositRepository {
     findAllDeposit() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Deposit.findAll();
+                return yield deposit_model_1.Deposit.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch deposits: ${error.message}`);
@@ -32,7 +35,7 @@ export class DepositRepository {
     findDepositById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Deposit.findByPk(id);
+                return yield deposit_model_1.Deposit.findByPk(id);
             }
             catch (error) {
                 throw new Error(`Unable to fetch deposit with ID: ${error.message}`);
@@ -59,3 +62,4 @@ export class DepositRepository {
         });
     }
 }
+exports.DepositRepository = DepositRepository;

@@ -1,38 +1,45 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../shared/connection.js";
-export class Profile extends Model {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Profile = void 0;
+const sequelize_1 = require("sequelize");
+const connection_1 = __importDefault(require("../shared/connection"));
+class Profile extends sequelize_1.Model {
 }
+exports.Profile = Profile;
 Profile.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     firstname: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     lastname: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     profession: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     balance: {
-        type: DataTypes.FLOAT,
+        type: sequelize_1.DataTypes.FLOAT,
         allowNull: false,
         validate: {
             min: 0,
         },
     },
     type: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    sequelize,
+    sequelize: connection_1.default,
     modelName: "Profile",
     tableName: "profiles",
     timestamps: false,

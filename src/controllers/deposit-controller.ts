@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { DepositService } from '../services/deposit-service.js';
+import { DepositService } from '../services/deposit-service';
 
 export class DepositController {
     private depositService = new DepositService();

@@ -1,31 +1,38 @@
-import { DataTypes, Model } from "sequelize";
-import sequelize from "../shared/connection.js";
-export class Contract extends Model {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Contract = void 0;
+const sequelize_1 = require("sequelize");
+const connection_1 = __importDefault(require("../shared/connection"));
+class Contract extends sequelize_1.Model {
 }
+exports.Contract = Contract;
 Contract.init({
     id: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
     profileId: {
-        type: DataTypes.INTEGER,
+        type: sequelize_1.DataTypes.INTEGER,
         allowNull: false,
     },
     terms: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
     operationDate: {
-        type: DataTypes.DATE,
+        type: sequelize_1.DataTypes.DATE,
         allowNull: false,
     },
     status: {
-        type: DataTypes.STRING,
+        type: sequelize_1.DataTypes.STRING,
         allowNull: false,
     },
 }, {
-    sequelize,
+    sequelize: connection_1.default,
     modelName: "Contract",
     tableName: "contracts",
     timestamps: false,

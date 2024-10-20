@@ -1,11 +1,13 @@
-import { Router } from "express";
-import { PaymentController } from "../controllers/paymnt-controller.js";
-const router = Router();
-const paymentController = new PaymentController();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const paymnt_controller_1 = require("../controllers/paymnt-controller");
+const router = (0, express_1.Router)();
+const paymentController = new paymnt_controller_1.PaymentController();
 router.post("/", (req, res) => paymentController.createPayment(req, res));
 router.get("/", (req, res) => paymentController.getAllPayments(req, res));
 router.get("/:id", (req, res) => paymentController.getPaymentById(req, res));
 router.put("/:id", (req, res) => paymentController.updatePayment(req, res));
 router.delete("/:id", (req, res) => paymentController.deletePayment(req, res));
 router.get("/job/:jobId", (req, res) => paymentController.getPaymentsByJob(req, res));
-export default router;
+exports.default = router;

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Profile } from "../models/profile-model";
-export class ProfileRepository {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProfileRepository = void 0;
+const profile_model_1 = require("../models/profile-model");
+class ProfileRepository {
     createProfile(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Profile.create(data);
+                return yield profile_model_1.Profile.create(data);
             }
             catch (error) {
                 throw new Error(`Unable to create profile: ${error.message}`);
@@ -22,7 +25,7 @@ export class ProfileRepository {
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Profile.findAll();
+                return yield profile_model_1.Profile.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch profiles: ${error.message}`);
@@ -32,7 +35,7 @@ export class ProfileRepository {
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Profile.findByPk(id);
+                return yield profile_model_1.Profile.findByPk(id);
             }
             catch (error) {
                 throw new Error(`Unable to fetch profile with ID: ${error.message}`);
@@ -67,7 +70,7 @@ export class ProfileRepository {
     findAllPayment() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Profile.findAll();
+                return yield profile_model_1.Profile.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch profiles: ${error.message}`);
@@ -75,3 +78,4 @@ export class ProfileRepository {
         });
     }
 }
+exports.ProfileRepository = ProfileRepository;

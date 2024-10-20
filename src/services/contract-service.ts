@@ -1,4 +1,4 @@
-import { Contract, ContractCreationAttributes } from "../models/contract-model.js";
+import { Contract, ContractCreationAttributes } from "../models/contract-model";
 
 export class ContractService {
     

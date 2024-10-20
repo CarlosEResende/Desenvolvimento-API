@@ -1,5 +1,5 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import sequelize from "../shared/connection.js";
+import sequelize from "../shared/connection";
 
 
 interface ContractAttributes {

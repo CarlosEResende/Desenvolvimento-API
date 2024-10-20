@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Job } from "../models/job-model.js";
-export class JobRepository {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobRepository = void 0;
+const job_model_1 = require("../models/job-model");
+class JobRepository {
     createJob(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Job.create(data);
+                return yield job_model_1.Job.create(data);
             }
             catch (error) {
                 throw new Error(`Unable to create job: ${error.message}`);
@@ -22,7 +25,7 @@ export class JobRepository {
     findAll() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Job.findAll();
+                return yield job_model_1.Job.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch jobs: ${error.message}`);
@@ -32,7 +35,7 @@ export class JobRepository {
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Job.findByPk(id);
+                return yield job_model_1.Job.findByPk(id);
             }
             catch (error) {
                 throw new Error(`Unable to fetch job with ID: ${error.message}`);
@@ -60,7 +63,7 @@ export class JobRepository {
     }
     sumUnpaidJobs() {
         return __awaiter(this, void 0, void 0, function* () {
-            const result = yield Job.sum('price', {
+            const result = yield job_model_1.Job.sum('price', {
                 where: {
                     paid: false,
                 },
@@ -69,3 +72,4 @@ export class JobRepository {
         });
     }
 }
+exports.JobRepository = JobRepository;

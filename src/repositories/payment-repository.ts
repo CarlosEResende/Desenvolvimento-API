@@ -1,4 +1,4 @@
-import { Payment, PaymentCreationAttributes } from "../models/payment-model.js";
+import { Payment, PaymentCreationAttributes } from "../models/payment-model";
 
 export class PaymentRepository {
 

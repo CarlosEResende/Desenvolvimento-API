@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,11 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { PaymentRepository } from '../repositories/payment-repository.js';
-import { Payment } from '../models/payment-model.js';
-export class PaymentService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaymentService = void 0;
+const payment_repository_1 = require("../repositories/payment-repository");
+const payment_model_1 = require("../models/payment-model");
+class PaymentService {
     constructor() {
-        this.paymentRepository = new PaymentRepository();
+        this.paymentRepository = new payment_repository_1.PaymentRepository();
     }
     createPayment(jobId, paymentValue, operationDate) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -19,7 +22,7 @@ export class PaymentService {
                 throw new Error("Payment value must be positive.");
             }
             try {
-                const payment = yield Payment.create({
+                const payment = yield payment_model_1.Payment.create({
                     jobId,
                     paymentValue,
                     operationDate,
@@ -34,7 +37,7 @@ export class PaymentService {
     getAllPayments() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.findAll();
+                return yield payment_model_1.Payment.findAll();
             }
             catch (error) {
                 if (error instanceof Error) {
@@ -49,7 +52,7 @@ export class PaymentService {
     getPaymentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const payment = yield Payment.findByPk(id);
+                const payment = yield payment_model_1.Payment.findByPk(id);
                 if (!payment) {
                     throw new Error(`Payment with ID ${id} not found.`);
                 }
@@ -68,7 +71,7 @@ export class PaymentService {
     updatePayment(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const payment = yield Payment.findByPk(id);
+                const payment = yield payment_model_1.Payment.findByPk(id);
                 if (!payment) {
                     return null;
                 }
@@ -83,7 +86,7 @@ export class PaymentService {
     deletePayment(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const payment = yield Payment.findByPk(id);
+                const payment = yield payment_model_1.Payment.findByPk(id);
                 if (!payment) {
                     return false;
                 }
@@ -106,3 +109,4 @@ export class PaymentService {
         });
     }
 }
+exports.PaymentService = PaymentService;

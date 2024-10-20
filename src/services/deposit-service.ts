@@ -1,4 +1,4 @@
-import { Deposit } from "../models/deposit-model.js";
+import { Deposit } from "../models/deposit-model";
 
 export class DepositService {
     

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { ProfileService } from "../services/profile-service.js";
-export class ProfileController {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProfileController = void 0;
+const profile_service_1 = require("../services/profile-service");
+class ProfileController {
     constructor() {
-        this.profileService = new ProfileService();
+        this.profileService = new profile_service_1.ProfileService();
     }
     createProfile(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -83,3 +86,4 @@ export class ProfileController {
         });
     }
 }
+exports.ProfileController = ProfileController;

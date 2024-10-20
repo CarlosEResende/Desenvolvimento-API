@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,16 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Job } from "../models/job-model.js";
-import { JobRepository } from '../repositories/job-repository.js';
-export class JobService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JobService = void 0;
+const job_model_1 = require("../models/job-model");
+const job_repository_1 = require("../repositories/job-repository");
+class JobService {
     constructor() {
-        this.jobRepository = new JobRepository;
+        this.jobRepository = new job_repository_1.JobRepository;
     }
     createJob(contractId, operationDate, paymentDate, price, paid) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const job = yield Job.create({
+                const job = yield job_model_1.Job.create({
                     contractId,
                     operationDate: new Date(),
                     paymentDate: new Date(),
@@ -38,7 +41,7 @@ export class JobService {
     getJobById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const job = yield Job.findByPk(id);
+                const job = yield job_model_1.Job.findByPk(id);
                 if (!job) {
                     throw new Error(`Job with ID ${id} not found.`);
                 }
@@ -57,7 +60,7 @@ export class JobService {
     getJobsByContract(contractId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Job.findAll({ where: { contractId } });
+                return yield job_model_1.Job.findAll({ where: { contractId } });
             }
             catch (error) {
                 if (error instanceof Error) {
@@ -120,3 +123,4 @@ export class JobService {
         });
     }
 }
+exports.JobService = JobService;

@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,10 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { PaymentService } from '../services/payment-service.js';
-export class PaymentController {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaymentController = void 0;
+const payment_service_1 = require("../services/payment-service");
+class PaymentController {
     constructor() {
-        this.paymentService = new PaymentService();
+        this.paymentService = new payment_service_1.PaymentService();
     }
     createPayment(req, res) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -94,3 +97,4 @@ export class PaymentController {
         });
     }
 }
+exports.PaymentController = PaymentController;

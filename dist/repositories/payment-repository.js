@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Payment } from "../models/payment-model.js";
-export class PaymentRepository {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PaymentRepository = void 0;
+const payment_model_1 = require("../models/payment-model");
+class PaymentRepository {
     createPayment(data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.create(data);
+                return yield payment_model_1.Payment.create(data);
             }
             catch (error) {
                 throw new Error(`Unable to create payment: ${error.message}`);
@@ -22,7 +25,7 @@ export class PaymentRepository {
     findAllPayment() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.findAll();
+                return yield payment_model_1.Payment.findAll();
             }
             catch (error) {
                 throw new Error(`Unable to fetch payments: ${error.message}`);
@@ -32,7 +35,7 @@ export class PaymentRepository {
     findById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.findByPk(id);
+                return yield payment_model_1.Payment.findByPk(id);
             }
             catch (error) {
                 throw new Error(`Unable to fetch payments with ID: ${error.message}`);
@@ -42,7 +45,7 @@ export class PaymentRepository {
     findByJobId(jobId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Payment.findAll({ where: { jobId } });
+                return yield payment_model_1.Payment.findAll({ where: { jobId } });
             }
             catch (error) {
                 throw new Error(`Unable to fetch payments for job ID ${jobId}: ${error.message}`);
@@ -69,3 +72,4 @@ export class PaymentRepository {
         });
     }
 }
+exports.PaymentRepository = PaymentRepository;

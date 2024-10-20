@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -7,12 +8,14 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import { Profile } from "../models/profile-model.js";
-export class ProfileService {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ProfileService = void 0;
+const profile_model_1 = require("../models/profile-model");
+class ProfileService {
     createProfile(firstname, lastname, profession, type, balance) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const profile = yield Profile.create({ firstname, lastname, profession, balance, type });
+                const profile = yield profile_model_1.Profile.create({ firstname, lastname, profession, balance, type });
                 return profile;
             }
             catch (error) {
@@ -28,7 +31,7 @@ export class ProfileService {
     getBalance(profileId) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const profile = yield Profile.findByPk(profileId);
+                const profile = yield profile_model_1.Profile.findByPk(profileId);
                 return profile ? profile.balance : null;
             }
             catch (error) {
@@ -44,7 +47,7 @@ export class ProfileService {
     updateProfile(id, data) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const profile = yield Profile.findByPk(id);
+                const profile = yield profile_model_1.Profile.findByPk(id);
                 if (!profile) {
                     return null;
                 }
@@ -59,7 +62,7 @@ export class ProfileService {
     deleteProfile(id) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                const profile = yield Profile.findByPk(id);
+                const profile = yield profile_model_1.Profile.findByPk(id);
                 if (!profile) {
                     return false;
                 }
@@ -74,7 +77,7 @@ export class ProfileService {
     getAllProfile() {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                return yield Profile.findAll();
+                return yield profile_model_1.Profile.findAll();
             }
             catch (error) {
                 if (error instanceof Error) {
@@ -87,3 +90,4 @@ export class ProfileService {
         });
     }
 }
+exports.ProfileService = ProfileService;

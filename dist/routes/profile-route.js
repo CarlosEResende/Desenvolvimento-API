@@ -1,10 +1,12 @@
-import { Router } from "express";
-import { ProfileController } from "../controllers/profile-controller.js";
-const router = Router();
-const profileController = new ProfileController();
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const profile_controller_1 = require("../controllers/profile-controller");
+const router = (0, express_1.Router)();
+const profileController = new profile_controller_1.ProfileController();
 router.post("/", (req, res) => profileController.createProfile(req, res));
 router.get("/:id/balance", (req, res) => profileController.getBalance(req, res));
 router.get("/", (req, res) => profileController.getAllProfile(req, res));
 router.put("/:id", (req, res) => profileController.updateProfile(req, res));
 router.delete("/:id", (req, res) => profileController.deleteProfile(req, res));
-export default router;
+exports.default = router;
