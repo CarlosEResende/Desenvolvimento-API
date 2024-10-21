@@ -4,7 +4,7 @@ import app from '../app';
 test('deve criar um novo perfil com sucesso', async () => {
     const newProfileData = {
         id: 1,
-        firstname: 'Marina',
+        firstname: 'Ana Marina',
         lastname: 'Santos',
         profession: 'Desenvolvedora',
         type: 'Sem Tipo',
