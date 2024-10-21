@@ -8,7 +8,7 @@ test('deve criar um novo perfil com sucesso', async () => {
         lastname: 'Santos',
         profession: 'Desenvolvedora',
         type: 'Sem Tipo',
-        balance: 1190.00
+        balance: 1890.00
     };
 
     const response = await request(app)
