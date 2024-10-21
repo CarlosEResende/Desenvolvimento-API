@@ -28,7 +28,7 @@ if (process.env.NODE_ENV !== 'test') {
     (async () => {
         try {
             await sequelize.authenticate();
-            console.log("Database connected successfully!");
+            console.log("Database connected successfully");
 
             await sequelize.sync({ force: false });
             console.log("Models synchronized with the database.");
