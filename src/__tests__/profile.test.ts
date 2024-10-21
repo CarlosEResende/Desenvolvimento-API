@@ -6,8 +6,8 @@ test('deve criar um novo perfil com sucesso', async () => {
         id: 1,
         firstname: 'Marina',
         lastname: 'Silva',
-        profession: 'Desenvolvedor',
-        type: 'Pessoal',
+        profession: 'Desenvolvedora',
+        type: 'Sem Tipo',
         balance: 1190.00
     };
 
