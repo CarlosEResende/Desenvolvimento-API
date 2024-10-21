@@ -5,7 +5,7 @@ test('deve criar um novo perfil com sucesso', async () => {
     const newProfileData = {
         id: 1,
         firstname: 'Marina',
-        lastname: 'Silva',
+        lastname: 'Santos',
         profession: 'Desenvolvedora',
         type: 'Sem Tipo',
         balance: 1190.00
