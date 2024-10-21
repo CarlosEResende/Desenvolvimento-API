@@ -31,11 +31,7 @@ pipeline {
                 bat 'start /b npm start'
             }
         }
-        stage('Stop App') {
-            steps {
-                bat 'taskkill /F /IM node.exe'
-            }
-        }
+        
     }
 
     post {
